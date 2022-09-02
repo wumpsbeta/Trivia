@@ -137,7 +137,6 @@ module.exports = {
                     title: "Generating trivia..",
                     description: "Please wait while the trivia generates!",
                     color: "#6e8bd3",
-                    ephemeral: true,
                 }),
             ],
         });
@@ -263,31 +262,40 @@ module.exports = {
 
         var targetProxy = new Proxy(ended, {
             set: async function (target, key, value) {
+              const competitor = client.guilds.cache.get("989610280369676290").roles.cache.find(r => r.id === "1015273760221306960");
+
+              const winner = client.guilds.cache.get("989610280369676290").roles.cache.find(r => r.id === "1015273826260631573");
+              
                 const score = checkAnswers(answers_n, questions);
                 if (score < 2) {
                     await interaction.member.send(
                         `You completed Wumps Trivia with a score of ${score}/8 (${
                             (score / 8) * 100
-                        }%). 😡\nDue to this, you have not received any roles, including: Wumps Trivia Contestant. 😤`
+                        }%). 😡\nDue to this, you have not received any roles in Wumpus Paradise, including Wumps Trivia Contestant. 😤`
                     );
                 } else if (score < 4) {
                     await interaction.member.send(
                         `You completed Wumps Trivia with a score of ${score}/8 (${
                             (score / 8) * 100
-                        }%). 😟\nHowever, you have still received the following role: Wumps Trivia Competitor!`
+                        }%). 😟\nHowever, you have still received Wumps Trivia Competitor in Wumpus Paradise!`
                     );
+             await client.guilds.cache.get('989610280369676290').members.cache.get(interaction.member.id).roles.add(competitor);
                 } else if (score === 4 || score === 5) {
                     await interaction.member.send(
                         `You completed Wumps Trivia with a score of ${score}/8 (${
                             (score / 8) * 100
-                        }%). 😬\nHowever, you have still received the following role: Wumps Trivia Competitor!`
+                        }%). 😬\nHowever, you have still received Wumps Trivia Competitor in Wumpus Paradise!`
                     );
+               await client.guilds.cache.get('989610280369676290').members.cache.get(interaction.member.id).roles.add(competitor);
                 } else if (score > 5) {
                     await interaction.member.send(
                         `Congratulations, you completed Wumps Trivia with a score of ${score}/8 (${
                             (score / 8) * 100
-                        }%)! 😮\nYou have received the following roles: Wumps Trivia Competitor, and Wumps Trivia Winner! 🥳`
+                        }%)! 😮\nYou have received both Wumps Trivia Competitor and Wumps Trivia Winner in Wumpus Paradise! 🥳`
                     );
+                await client.guilds.cache.get('989610280369676290').members.cache.get(interaction.member.id).roles.add(competitor);
+                
+                await client.guilds.cache.get('989610280369676290').members.cache.get(interaction.member.id).roles.add(winner);
                 }
                 target[key] = value;
                 return true;
