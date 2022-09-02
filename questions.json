@@ -1,0 +1,58 @@
+[
+    {
+        "question": "Who founded Wumps?",
+        "options": [
+            "Wumpus#0006","Fizzie#4269","Arctic#1632","araincoat?#7272"
+        ],
+        "key": "Wumpus#0006"
+    },
+    {
+        "question": "When was Wumps accepted on top.gg?",
+        "options": [
+            "February 5th 2021","February 7th 2021","January 28 2021","March 5 2021"
+        ],
+        "key": "February 7th 2021"
+    },
+    {
+        "question": "When was Wumps created?",
+        "options": [
+            "December 29 2020","January 21 2021","January 18 2021", "January 23 2021"
+        ],
+        "key": "January 21 2021"
+    },
+    {
+        "question": "When was Wumps verified?",
+        "options": [
+            "February 9 2021","March 12 2021","April 8 2021", "April 12 2021"
+        ],
+        "key": "April 8 2021"
+    },
+    {
+        "question": "What was Wumps' original name?",
+        "options": [
+            "Candy Dandy", "Wumpy", "Wumps Beta", "Wumpency"
+        ],
+        "key": "Candy Dandy"
+    },
+    {
+        "question": "When did Wumps get a second developer?",
+        "options": [
+            "March 20 2021", "February 15 2021", "March 15 2021", "March 2 2021"
+        ],
+        "key": "February 15 2021"
+    },
+    {
+        "question": "Which command contains Wumps' original profile picture?",
+        "options": [
+            "w!help", "w!askwumps", "w!wumpus", "w!botinfo"
+        ],
+        "key": "w!askwumps"
+    },
+    {
+        "question": "What is the total number of commands Wumps contains?",
+        "options": [
+            "36", "48", "65", "51"
+        ],
+        "key": "51"
+    }
+]
