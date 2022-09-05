@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const triviaSchema = require("../../schemas/trivia");
 
 function shuffle(array) {
     let currentIndex = array.length,
@@ -126,8 +127,28 @@ module.exports = {
      * @param {String[]} args
      */
     run: async (client, interaction) => {
+      const { user } = interaction;
+      
+        const filter = {
+            _id: `${interaction.guild.id}_${interaction.user.id}`,
+            userId: interaction.user.id,
+        };
+        const update = { $inc: { userAttempts: parseInt(1) } };
+        let data = await triviaSchema.findOneAndUpdate(filter, update);
+
+        if (!data) {
+            data = await triviaSchema.create({
+                _id: `${interaction.guild.id}_${interaction.user.id}`,
+                userId: interaction.user.id,
+                userAttempts: parseInt(1),
+            });
+        }
         await interaction.deferReply({ ephemeral: true });
-        const { user } = interaction;
+
+        if (data.userAttempts >= 2)
+            return interaction.editReply(
+                "You cannot play the trivia more than twice! 🙁"
+            );
 
         const questions = require("../../questions.json");
 
@@ -262,10 +283,14 @@ module.exports = {
 
         var targetProxy = new Proxy(ended, {
             set: async function (target, key, value) {
-              const competitor = client.guilds.cache.get("989610280369676290").roles.cache.find(r => r.id === "1015273760221306960");
+                const competitor = client.guilds.cache
+                    .get("989610280369676290")
+                    .roles.cache.find((r) => r.id === "1015273760221306960");
 
-              const winner = client.guilds.cache.get("989610280369676290").roles.cache.find(r => r.id === "1015273826260631573");
-              
+                const winner = client.guilds.cache
+                    .get("989610280369676290")
+                    .roles.cache.find((r) => r.id === "1015273826260631573");
+
                 const score = checkAnswers(answers_n, questions);
                 if (score < 2) {
                     await interaction.member.send(
@@ -279,23 +304,35 @@ module.exports = {
                             (score / 8) * 100
                         }%). 😟\nHowever, you have still received Wumps Trivia Competitor in Wumpus Paradise!`
                     );
-             await client.guilds.cache.get('989610280369676290').members.cache.get(interaction.member.id).roles.add(competitor);
+                    await client.guilds.cache
+                        .get("989610280369676290")
+                        .members.cache.get(interaction.member.id)
+                        .roles.add(competitor);
                 } else if (score === 4 || score === 5) {
                     await interaction.member.send(
                         `You completed Wumps Trivia with a score of ${score}/8 (${
                             (score / 8) * 100
                         }%). 😬\nHowever, you have still received Wumps Trivia Competitor in Wumpus Paradise!`
                     );
-               await client.guilds.cache.get('989610280369676290').members.cache.get(interaction.member.id).roles.add(competitor);
+                    await client.guilds.cache
+                        .get("989610280369676290")
+                        .members.cache.get(interaction.member.id)
+                        .roles.add(competitor);
                 } else if (score > 5) {
                     await interaction.member.send(
                         `Congratulations, you completed Wumps Trivia with a score of ${score}/8 (${
                             (score / 8) * 100
                         }%)! 😮\nYou have received both Wumps Trivia Competitor and Wumps Trivia Winner in Wumpus Paradise! 🥳`
                     );
-                await client.guilds.cache.get('989610280369676290').members.cache.get(interaction.member.id).roles.add(competitor);
-                
-                await client.guilds.cache.get('989610280369676290').members.cache.get(interaction.member.id).roles.add(winner);
+                    await client.guilds.cache
+                        .get("989610280369676290")
+                        .members.cache.get(interaction.member.id)
+                        .roles.add(competitor);
+
+                    await client.guilds.cache
+                        .get("989610280369676290")
+                        .members.cache.get(interaction.member.id)
+                        .roles.add(winner);
                 }
                 target[key] = value;
                 return true;
