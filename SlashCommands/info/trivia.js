@@ -284,12 +284,12 @@ module.exports = {
         var targetProxy = new Proxy(ended, {
             set: async function (target, key, value) {
                 const competitor = client.guilds.cache
-                    .get("989610280369676290")
-                    .roles.cache.find((r) => r.id === "1015273760221306960");
+                    .get("801470504803893278")
+                    .roles.cache.find((r) => r.id === "1015269694065885395");
 
                 const winner = client.guilds.cache
-                    .get("989610280369676290")
-                    .roles.cache.find((r) => r.id === "1015273826260631573");
+                    .get("801470504803893278")
+                    .roles.cache.find((r) => r.id === "1015269957652725852");
 
                 const score = checkAnswers(answers_n, questions);
                 if (score < 2) {
@@ -305,7 +305,7 @@ module.exports = {
                         }%). 😟\nHowever, you have still received Wumps Trivia Competitor in Wumpus Paradise!`
                     );
                     await client.guilds.cache
-                        .get("989610280369676290")
+                        .get("801470504803893278")
                         .members.cache.get(interaction.member.id)
                         .roles.add(competitor);
                 } else if (score === 4 || score === 5) {
@@ -315,7 +315,7 @@ module.exports = {
                         }%). 😬\nHowever, you have still received Wumps Trivia Competitor in Wumpus Paradise!`
                     );
                     await client.guilds.cache
-                        .get("989610280369676290")
+                        .get("801470504803893278")
                         .members.cache.get(interaction.member.id)
                         .roles.add(competitor);
                 } else if (score > 5) {
@@ -325,12 +325,12 @@ module.exports = {
                         }%)! 😮\nYou have received both Wumps Trivia Competitor and Wumps Trivia Winner in Wumpus Paradise! 🥳`
                     );
                     await client.guilds.cache
-                        .get("989610280369676290")
+                        .get("801470504803893278")
                         .members.cache.get(interaction.member.id)
                         .roles.add(competitor);
 
                     await client.guilds.cache
-                        .get("989610280369676290")
+                        .get("801470504803893278")
                         .members.cache.get(interaction.member.id)
                         .roles.add(winner);
                 }

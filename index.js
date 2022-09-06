@@ -1,7 +1,7 @@
-const { Client, Collection } = require("discord.js");
+const { Client, Intents, Collection } = require("discord.js");
 
 const client = new Client({
-    intents: 32767,
+    intents: [ Intents.FLAGS.GUILDS ],
 });
 module.exports = client;
 
