@@ -14,14 +14,3 @@ client.config = require("./config.js");
 require("./handler")(client);
 
 client.login(client.config.token);
-
-// Keeping the code alive
-const express = require('express')
-const app = express();
-const port = 3000;
-app.get('/', (req, res) => {
-  res.redirect('https://discord.gg/4Dz2CHpmaT')
-})
-app.listen(port, () => {
-  console.log(`Connected to express - http://localhost:${port}`)
-})
