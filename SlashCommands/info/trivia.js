@@ -161,7 +161,10 @@ module.exports = {
                 }),
             ],
         });
-        const msg = await user.send(await questionEmbedRow(0, questions, user));
+  
+try {
+  const msg = await user.send(await questionEmbedRow(0, questions, user));
+
         await interaction.editReply({
             embeds: [
                 new Discord.MessageEmbed({
@@ -172,12 +175,12 @@ module.exports = {
             ],
         });
 
-        const collector = await msg.channel.createMessageComponentCollector({});
+      const collector = await msg.channel.createMessageComponentCollector({});
 
         let answers = [];
         let answers_n = [];
 
-        collector.on("collect", async (customInteraction) => {
+      collector.on("collect", async (customInteraction) => {
             const { customId } = customInteraction;
             answers.push(customId);
 
@@ -332,8 +335,9 @@ module.exports = {
                     await client.guilds.cache
                         .get("801470504803893278")
                         .members.cache.get(interaction.member.id)
-                        .roles.add(winner);
+                        .roles.add(winner); 
                 }
+              console.log(`${interaction.user.tag} scored ${score}/8 in Wumps Trivia!`) 
                 target[key] = value;
                 return true;
             },
@@ -342,5 +346,16 @@ module.exports = {
         collector.on("end", async () => {
             targetProxy.didItEnd = true;
         });
+  } catch {
+  return await interaction.editReply({
+    embeds: [
+      new Discord.MessageEmbed({
+        title: "Error",
+        description: "The bot cannot generate a trivia game for you as your DMs are off. Please enable them and try again. 😥",
+        color: "#6e8bd3",
+      }),
+    ],
+  })
+};
     },
 };
